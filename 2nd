@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioLab Suite: Gallery & Vocab Decoder</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+    <header class="bg-emerald-700 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <i data-lucide="microscope" class="w-8 h-8"></i>
+                <h1 class="text-xl font-bold tracking-tight">BioLab Companion</h1>
+            </div>
+            <nav class="flex bg-emerald-800 rounded-lg p-1">
+                <button id="tab-gallery" class="px-4 py-2 rounded-md font-medium text-sm transition-all bg-white text-emerald-900 shadow">
+                    Histology Gallery
+                </button>
+                <button id="tab-vocab" class="px-4 py-2 rounded-md font-medium text-sm transition-all text-emerald-100 hover:text-white">
+                    Vocab Decoder
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6">
+        
+        <section id="view-gallery" class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Digital Histology & Organelle Desk</h2>
+                    <p class="text-slate-500 text-sm">Bridge the gap between perfect diagrams and real classroom microscope slides.</p>
+                </div>
+                <div id="gallery-filters" class="flex flex-wrap gap-2">
+                    </div>
+            </div>
+
+            <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                </div>
+        </section>
+
+        <section id="view-vocab" class="hidden space-y-8">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900">Bio-Vocab Roots Decoder</h2>
+                <p class="text-slate-500 text-sm">Deconstruct complex scientific terms using Greek & Latin root architectures.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-6">
+                    <div class="bg-white p-5 rounded-xl shadow-xs border border-slate-200">
+                        <h3 class="font-bold text-slate-900 flex items-center gap-2 mb-4">
+                            <i data-lucide="wrench" class="w-5 h-5 text-emerald-600"></i> Word Builder
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Prefix</label>
+                                <select id="select-prefix" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:outline-emerald-600"></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Suffix / Root</label>
+                                <select id="select-suffix" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:outline-emerald-600"></select>
+                            </div>
+                            <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg mt-2 text-center">
+                                <div id="builder-result" class="text-xl font-black text-emerald-800 tracking-wide">Select Roots</div>
+                                <p id="builder-definition" class="text-xs text-emerald-700 mt-1 italic">Combine components to build meanings.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl shadow-xs border border-slate-200">
+                        <h3 class="font-bold text-slate-900 flex items-center gap-2 mb-3">
+                            <i data-lucide="graduation-cap" class="w-5 h-5 text-emerald-600"></i> Self-Quiz Flashcard
+                        </h3>
+                        <div id="quiz-container" class="space-y-4">
+                            </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 bg-white p-5 rounded-xl shadow-xs border border-slate-200 flex flex-col">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                        <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                            <i data-lucide="book-open" class="w-5 h-5 text-emerald-600"></i> Prefix & Suffix Dictionary
+                        </h3>
+                        <div class="relative max-w-xs w-full">
+                            <input id="dictionary-search" type="text" placeholder="Search roots or definitions..." class="w-full pl-9 pr-4 py-1.5 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:outline-emerald-600">
+                            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto rounded-lg border border-slate-200">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-600 font-semibold border-b border-slate-200">
+                                    <th class="p-3">Component</th>
+                                    <th class="p-3">Type</th>
+                                    <th class="p-3">Literal Meaning</th>
+                                    <th class="p-3">Application Example</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dictionary-rows" class="divide-y divide-slate-200">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
